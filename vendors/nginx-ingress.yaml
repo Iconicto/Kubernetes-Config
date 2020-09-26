@@ -1,16 +1,16 @@
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
-  name: nginx-ingress
+  name: ingress-nginx
   namespace: ingress-nginx
   annotations:
     fluxcd.io/automated: "true"
     filter.fluxcd.io/chart-image: glob:*
 spec:
-  releaseName: nginx-ingress
+  releaseName: ingress-nginx
   chart:
-    repository: https://kubernetes-charts.storage.googleapis.com/
-    name: nginx-ingress
+    repository: https://kubernetes.github.io/ingress-nginx
+    name: ingress-nginx
     version: ~3
   values:
     controller:
