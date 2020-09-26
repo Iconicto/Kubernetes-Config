@@ -1,0 +1,3 @@
+*.yaml linguist-detectable
+*.md linguist-detectable
+*.txt linguist-detectable
