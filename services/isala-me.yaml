@@ -1,0 +1,26 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: isala-me
+  annotations:
+    fluxcd.io/automated: "true"
+    filter.fluxcd.io/chart-image: glob:*
+spec:
+  releaseName: isala-me
+  chart:
+    git: git@github.com:Iconicto/Kubernetes-Config.git
+    path: charts/standard-chart
+    ref: master
+  values:
+    nameOverride: isala-me
+    fullnameOverride: isala-me
+    AppVersion: "1.0.0"
+    image:
+      name: isala-me
+      repository: docker.pkg.github.com/mrsupiri/isala.me/isala-website
+      tag: production
+    replicaCount: 1
+    service:
+      enabled: true
+      type: ClusterIP
+      port: 8080
