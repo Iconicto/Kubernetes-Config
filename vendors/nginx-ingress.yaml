@@ -16,3 +16,5 @@ spec:
     controller:
       service:
         type: LoadBalancer
+    tcp:
+       25565: "default/minecraft:25565"
