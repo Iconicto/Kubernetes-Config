@@ -1,3 +1,4 @@
+---
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
@@ -20,20 +21,20 @@ spec:
         nginx.ingress.kubernetes.io/configuration-snippet: |
           proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
       hosts:
-        - host: isala.me
-        - host: www.isala.me
+      - host: isala.me
+      - host: www.isala.me
       tls:
       - secretName: isala-me
         hosts:
-          - isala.me
-          - www.isala.me
+        - isala.me
+        - www.isala.me
     nameOverride: isala-me
     fullnameOverride: isala-me
     AppVersion: "1.0.0"
     image:
       name: isala-me
       repository: ghcr.io/mrsupiri/isala-me
-      tag: latest
+      tag: build-6
     replicaCount: 1
     service:
       enabled: true
