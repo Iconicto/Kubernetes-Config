@@ -17,4 +17,4 @@ spec:
       service:
         type: LoadBalancer
     tcp:
-       25565: "default/minecraft:25565"
+       25565: "default/cranky-bees-minecraft:25565"

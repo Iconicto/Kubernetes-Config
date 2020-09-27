@@ -1,0 +1,19 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: minecraft
+  annotations:
+    fluxcd.io/automated: "true"
+    filter.fluxcd.io/chart-image: glob:*
+spec:
+  releaseName: cranky-bees
+  chart:
+    repository: https://itzg.github.io/minecraft-server-charts/
+    name: minecraft
+    version: ~2
+  values:
+    minecraftServer:
+      eula: true
+    persistence:
+      dataDir:
+        enabled: true
