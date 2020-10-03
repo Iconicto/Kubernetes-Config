@@ -1,0 +1,21 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: postgresql
+  annotations:
+    fluxcd.io/automated: "true"
+spec:
+  releaseName: postgresql
+  chart:
+    repository: https://charts.bitnami.com/bitnami
+    name: postgresql
+    version: ~9.8
+  values:
+    fullnameOverride: postgresql
+    existingSecret: postgresql
+    resources:
+      requests:
+        memory: 125Mi
+        cpu: 50m
+    persistence:
+      size: 2Gi
