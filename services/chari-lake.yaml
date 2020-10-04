@@ -1,80 +1,79 @@
----
-    apiVersion: helm.fluxcd.io/v1
-    kind: HelmRelease
-    metadata:
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: charilake
+spec:
+  releaseName: charilake
+  chart:
+    git: git@github.com:Iconicto/Kubernetes-Config.git
+    path: charts/standard-chart
+    ref: master
+  values:
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        nginx.ingress.kubernetes.io/ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/configuration-snippet: |
+          proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
+      hosts:
+      - host: charilakehotel.lk
+      - host: www.charilakehotel.lk
+      tls:
+      - secretName: charilakehotel-lk
+        hosts:
+        - charilakehotel.lk
+        - www.charilakehotel.lk
+    nameOverride: charilake
+    fullnameOverride: charilake
+    AppVersion: "1.0.0"
+    image:
       name: charilake
-    spec:
-      releaseName: charilake
-      chart:
-        git: git@github.com:Iconicto/Kubernetes-Config.git
-        path: charts/standard-chart
-        ref: master
-      values:
-        ingress:
-          enabled: true
-          annotations:
-            kubernetes.io/ingress.class: nginx
-            nginx.ingress.kubernetes.io/ssl-redirect: "true"
-            nginx.ingress.kubernetes.io/configuration-snippet: |
-              proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
-          hosts:
-          - host: charilakehotel.lk
-          - host: www.charilakehotel.lk
-          tls:
-          - secretName: charilakehotel-lk
-            hosts:
-            - charilakehotel.lk
-            - www.charilakehotel.lk
-        nameOverride: charilake
-        fullnameOverride: charilake
-        AppVersion: "1.0.0"
-        image:
-          name: charilake
-          repository: ghcr.io/iconicto/chari-lake
-          tag: latest
-        replicaCount: 1
-        service:
-          enabled: true
-          type: ClusterIP
-          port: 8000
-        env:
-          - name: DEBUG
-            value: "false"
-          - name: CDN_ENDPOINT
-            value: cdn.iconicto.com
-          - name: S3_ENDPOINT_URL
-            value: https://sgp1.digitaloceanspaces.com
-          - name: S3_STORAGE_BUCKET_NAME
-            value: iconicto
-          - name: S3_REGION_NAME
-            value: sgp1
-          - name: DEFAULT_ACL
-            value: public-read
-          - name: PG_USER
-            value: charilake
-          - name: PG_DBNAME
-            value: charilake
-          - name: PG_HOST
-            value: postgresql.default.svc.cluster.local
-          - name: PG_PORT
-            value: "5432"
-          - name: PG_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: charilake-secrets
-                key: PG_PASSWORD
-          - name: S3_ACCESS_KEY_ID
-            valueFrom:
-              secretKeyRef:
-                name: charilake-secrets
-                key: S3_ACCESS_KEY_ID
-          - name: S3_SECRET_ACCESS_KEY
-            valueFrom:
-              secretKeyRef:
-                name: charilake-secrets
-                key: S3_SECRET_ACCESS_KEY
-          - name: DJANGO_SECRET
-            valueFrom:
-              secretKeyRef:
-                name: charilake-secrets
-                key: DJANGO_SECRET
+      repository: ghcr.io/iconicto/chari-lake
+      tag: latest
+    replicaCount: 1
+    service:
+      enabled: true
+      type: ClusterIP
+      port: 8000
+    env:
+      - name: DEBUG
+        value: "false"
+      - name: CDN_ENDPOINT
+        value: cdn.iconicto.com
+      - name: S3_ENDPOINT_URL
+        value: https://sgp1.digitaloceanspaces.com
+      - name: S3_STORAGE_BUCKET_NAME
+        value: iconicto
+      - name: S3_REGION_NAME
+        value: sgp1
+      - name: DEFAULT_ACL
+        value: public-read
+      - name: PG_USER
+        value: charilake
+      - name: PG_DBNAME
+        value: charilake
+      - name: PG_HOST
+        value: postgresql.default.svc.cluster.local
+      - name: PG_PORT
+        value: "5432"
+      - name: PG_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: charilake-secrets
+            key: PG_PASSWORD
+      - name: S3_ACCESS_KEY_ID
+        valueFrom:
+          secretKeyRef:
+            name: charilake-secrets
+            key: S3_ACCESS_KEY_ID
+      - name: S3_SECRET_ACCESS_KEY
+        valueFrom:
+          secretKeyRef:
+            name: charilake-secrets
+            key: S3_SECRET_ACCESS_KEY
+      - name: DJANGO_SECRET
+        valueFrom:
+          secretKeyRef:
+            name: charilake-secrets
+            key: DJANGO_SECRET
