@@ -1,3 +1,4 @@
+---
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
@@ -33,50 +34,50 @@ spec:
     image:
       name: charilake
       repository: ghcr.io/iconicto/chari-lake
-      tag: latest
+      tag: build-5
     replicaCount: 1
     service:
       enabled: true
       type: ClusterIP
       port: 8000
     env:
-      - name: DEBUG
-        value: "false"
-      - name: CDN_ENDPOINT
-        value: cdn.iconicto.com
-      - name: S3_ENDPOINT_URL
-        value: https://sgp1.digitaloceanspaces.com
-      - name: S3_STORAGE_BUCKET_NAME
-        value: iconicto
-      - name: S3_REGION_NAME
-        value: sgp1
-      - name: DEFAULT_ACL
-        value: public-read
-      - name: PG_USER
-        value: charilake
-      - name: PG_DBNAME
-        value: charilake
-      - name: PG_HOST
-        value: postgresql.default.svc.cluster.local
-      - name: PG_PORT
-        value: "5432"
-      - name: PG_PASSWORD
-        valueFrom:
-          secretKeyRef:
-            name: charilake-secrets
-            key: PG_PASSWORD
-      - name: S3_ACCESS_KEY_ID
-        valueFrom:
-          secretKeyRef:
-            name: charilake-secrets
-            key: S3_ACCESS_KEY_ID
-      - name: S3_SECRET_ACCESS_KEY
-        valueFrom:
-          secretKeyRef:
-            name: charilake-secrets
-            key: S3_SECRET_ACCESS_KEY
-      - name: DJANGO_SECRET
-        valueFrom:
-          secretKeyRef:
-            name: charilake-secrets
-            key: DJANGO_SECRET
+    - name: DEBUG
+      value: "false"
+    - name: CDN_ENDPOINT
+      value: cdn.iconicto.com
+    - name: S3_ENDPOINT_URL
+      value: https://sgp1.digitaloceanspaces.com
+    - name: S3_STORAGE_BUCKET_NAME
+      value: iconicto
+    - name: S3_REGION_NAME
+      value: sgp1
+    - name: DEFAULT_ACL
+      value: public-read
+    - name: PG_USER
+      value: charilake
+    - name: PG_DBNAME
+      value: charilake
+    - name: PG_HOST
+      value: postgresql.default.svc.cluster.local
+    - name: PG_PORT
+      value: "5432"
+    - name: PG_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: charilake-secrets
+          key: PG_PASSWORD
+    - name: S3_ACCESS_KEY_ID
+      valueFrom:
+        secretKeyRef:
+          name: charilake-secrets
+          key: S3_ACCESS_KEY_ID
+    - name: S3_SECRET_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          name: charilake-secrets
+          key: S3_SECRET_ACCESS_KEY
+    - name: DJANGO_SECRET
+      valueFrom:
+        secretKeyRef:
+          name: charilake-secrets
+          key: DJANGO_SECRET
