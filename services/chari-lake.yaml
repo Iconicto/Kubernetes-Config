@@ -34,7 +34,7 @@ spec:
     image:
       name: charilake
       repository: ghcr.io/iconicto/chari-lake
-      tag: build-5
+      tag: build-6
     replicaCount: 1
     service:
       enabled: true
