@@ -80,4 +80,9 @@ spec:
       valueFrom:
         secretKeyRef:
           name: charilake-secrets
-          key: DJANGO_SECRET
+          key: DJANGO_SECRET    
+    - name: MAILGUN_API_KEY
+      valueFrom:
+        secretKeyRef:
+          name: charilake-secrets
+          key: MAILGUN_API_KEY
