@@ -34,7 +34,7 @@ spec:
     image:
       name: isala-me
       repository: ghcr.io/mrsupiri/isala-me
-      tag: build-9
+      tag: build-10
     replicaCount: 1
     service:
       enabled: true
